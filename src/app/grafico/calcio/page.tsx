@@ -1,7 +1,7 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useEffect, useRef, useState } from 'react';
 const ApexCharts =
-  typeof window !== "undefined" ? require("apexcharts").default : null;
+  typeof window !== 'undefined' ? require('apexcharts').default : null;
 
 const data = [
   28.1, 37.94, 33.55, 40.12, 36.8, 35.75, 38.67, 41.32, 30.2, 26.1, 34.02,
@@ -32,8 +32,8 @@ function calculateBoxPlotData(data: number[]) {
     value: v,
     strokeWidth: 0,
     strokeHeight: 13,
-    strokeLineCap: "round",
-    strokeColor: "#FEB019",
+    strokeLineCap: 'round',
+    strokeColor: '#FEB019',
   }));
   return { box: [whiskerMin, q1, q2, q3, whiskerMax], goals };
 }
@@ -47,33 +47,33 @@ export default function CalcioBoxplot() {
       const boxplot = calculateBoxPlotData(data);
       const options = {
         chart: {
-          type: "boxPlot",
+          type: 'boxPlot',
           height: 350,
-          background: "transparent",
-          fontFamily: "Inter, sans-serif",
+          background: 'transparent',
+          fontFamily: 'Inter, sans-serif',
           toolbar: { show: false },
         },
         series: [
           {
-            type: "boxPlot",
-            name: "Cálcio",
-            data: [{ x: "Cálcio", y: boxplot.box, goals: boxplot.goals }],
+            type: 'boxPlot',
+            name: 'Cálcio',
+            data: [{ x: 'Cálcio', y: boxplot.box, goals: boxplot.goals }],
           },
         ],
         xaxis: {
-          categories: ["Cálcio"],
-          labels: { style: { colors: "#6B7280" } },
+          categories: ['Cálcio'],
+          labels: { style: { colors: '#6B7280' } },
           axisBorder: { show: false },
           axisTicks: { show: false },
         },
         yaxis: {
-          labels: { style: { colors: "#6B7280" } },
-          title: { text: "Valores", style: { color: "#6B7280" } },
+          labels: { style: { colors: '#6B7280' } },
+          title: { text: 'Valores', style: { color: '#6B7280' } },
         },
-        tooltip: { theme: "dark", style: { fontSize: "12px" } },
-        grid: { borderColor: "#E5E7EB", strokeDashArray: 4 },
-        fill: { colors: ["#F59E0B"] },
-        legend: { labels: { colors: ["#6B7280"] } },
+        tooltip: { theme: 'dark', style: { fontSize: '12px' } },
+        grid: { borderColor: '#E5E7EB', strokeDashArray: 4 },
+        fill: { colors: ['#F59E0B'] },
+        legend: { labels: { colors: ['#6B7280'] } },
       };
       const newChart = new ApexCharts(chartRef.current, options);
       newChart.render();
@@ -85,45 +85,54 @@ export default function CalcioBoxplot() {
   }, [chart]);
 
   return (
-    <div className="font-sans flex flex-col items-center justify-center min-h-screen p-8 bg-gray-50 dark:bg-gray-50text-gray-900 dark:text-gray-900">
-      <nav className="flex justify-center gap-6 text-sm">
-        <a href="/" className="text-gray-900 hover:text-blue-600">
-          Mapa da Fazenda
+    <div className='font-sans flex flex-col items-center justify-center min-h-screen p-8 bg-gray-50 dark:bg-gray-50text-gray-900 dark:text-gray-900'>
+      <nav className='flex justify-center gap-6 text-sm'>
+        <a href='/' className='text-gray-900 hover:text-blue-600'>
+          Mapa da fazenda
         </a>
-        <a
-          href="/grafico/produtividade"
-          className="text-gray-900 hover:text-blue-600"
-        >
+        <a href='/grafico/produtividade' className='text-blue-600'>
           Boxplot
         </a>
-      </nav>
-      <h1 className="text-3xl font-bold text-center mb-4">Boxplot - Cálcio</h1>
-      <div ref={chartRef} className="w-full h-80 md:h-96"></div>
-      <nav className="flex justify-center gap-6 mt-6 text-sm">
         <a
-          href="/grafico/produtividade"
-          className="text-gray-900 hover:text-blue-600"
+          href='/grafico/produtividade-dispersao'
+          className='text-gray-900 hover:text-blue-600'
+        >
+          Dispersão
+        </a>
+        <a
+          href='/grafico/heatmap'
+          className='text-gray-900 hover:text-blue-600'
+        >
+          Heatmap
+        </a>
+      </nav>
+      <h1 className='text-3xl font-bold text-center mb-4'>Boxplot - Cálcio</h1>
+      <div ref={chartRef} className='w-full h-80 md:h-96'></div>
+      <nav className='flex justify-center gap-6 mt-6 text-sm'>
+        <a
+          href='/grafico/produtividade'
+          className='text-gray-900 hover:text-blue-600'
         >
           Produtividade
         </a>
         <a
-          href="/grafico/fosforo"
-          className="text-gray-900 hover:text-blue-600"
+          href='/grafico/fosforo'
+          className='text-gray-900 hover:text-blue-600'
         >
           Fósforo
         </a>
         <a
-          href="/grafico/potassio"
-          className="text-gray-900 hover:text-blue-600"
+          href='/grafico/potassio'
+          className='text-gray-900 hover:text-blue-600'
         >
           Potássio
         </a>
-        <a href="/grafico/calcio" className="text-blue-600 font-bold">
+        <a href='/grafico/calcio' className='text-blue-600 font-bold'>
           Cálcio
         </a>
         <a
-          href="/grafico/magnesio"
-          className="text-gray-900 hover:text-blue-600"
+          href='/grafico/magnesio'
+          className='text-gray-900 hover:text-blue-600'
         >
           Magnésio
         </a>
