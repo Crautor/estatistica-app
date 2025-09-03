@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useRef, useState } from 'react';
+"use client";
+import { useEffect, useRef, useState } from "react";
 const ApexCharts =
-  typeof window !== 'undefined' ? require('apexcharts').default : null;
+  typeof window !== "undefined" ? require("apexcharts").default : null;
 
 const data = [
   27.21, 14.9, 20.75, 9.55, 11.03, 8.82, 15.7, 5.3, 20.75, 43.84, 14.9, 13.32,
@@ -15,24 +15,24 @@ const data = [
 
 function calculateBoxPlotData(data: number[]) {
   const sorted = [...data].sort((a, b) => a - b);
-    const n = sorted.length;
-    const q1 = sorted[Math.floor(0.25 * (n + 1)) - 1];
-    const q2 = sorted[Math.floor(0.5 * (n + 1)) - 1];
-    const q3 = sorted[Math.floor(0.75 * (n + 1)) - 1];
-    const iqr = q3 - q1;
-    const lowerFence = q1 - 1.5 * iqr;
-    const upperFence = q3 + 1.5 * iqr;
-    const whiskerMin = sorted.find(v => v >= lowerFence);
-    const whiskerMax = [...sorted].reverse().find(v => v <= upperFence);
-    const outliers = sorted.filter(v => v < lowerFence || v > upperFence);
-    const goals = outliers.map(v => ({
-      value: v,
-      strokeWidth: 0,
-      strokeHeight: 13,
-      strokeLineCap: 'round',
-      strokeColor: '#FEB019',
-    }));
-    return { box: [whiskerMin, q1, q2, q3, whiskerMax], goals };
+  const n = sorted.length;
+  const q1 = sorted[Math.floor(0.25 * (n + 1)) - 1];
+  const q2 = sorted[Math.floor(0.5 * (n + 1)) - 1];
+  const q3 = sorted[Math.floor(0.75 * (n + 1)) - 1];
+  const iqr = q3 - q1;
+  const lowerFence = q1 - 1.5 * iqr;
+  const upperFence = q3 + 1.5 * iqr;
+  const whiskerMin = sorted.find((v) => v >= lowerFence);
+  const whiskerMax = [...sorted].reverse().find((v) => v <= upperFence);
+  const outliers = sorted.filter((v) => v < lowerFence || v > upperFence);
+  const goals = outliers.map((v) => ({
+    value: v,
+    strokeWidth: 0,
+    strokeHeight: 13,
+    strokeLineCap: "round",
+    strokeColor: "#FEB019",
+  }));
+  return { box: [whiskerMin, q1, q2, q3, whiskerMax], goals };
 }
 
 export default function FosforoBoxplot() {
@@ -44,33 +44,33 @@ export default function FosforoBoxplot() {
       const boxplot = calculateBoxPlotData(data);
       const options = {
         chart: {
-          type: 'boxPlot',
+          type: "boxPlot",
           height: 350,
-          background: 'transparent',
-          fontFamily: 'Inter, sans-serif',
+          background: "transparent",
+          fontFamily: "Inter, sans-serif",
           toolbar: { show: false },
         },
         series: [
           {
-            type: 'boxPlot',
-            name: 'Fósforo',
-            data: [{ x: 'Fósforo', y: boxplot.box, goals: boxplot.goals }],
+            type: "boxPlot",
+            name: "Fósforo",
+            data: [{ x: "Fósforo", y: boxplot.box, goals: boxplot.goals }],
           },
         ],
         xaxis: {
-          categories: ['Fósforo'],
-          labels: { style: { colors: '#6B7280' } },
+          categories: ["Fósforo"],
+          labels: { style: { colors: "#6B7280" } },
           axisBorder: { show: false },
           axisTicks: { show: false },
         },
         yaxis: {
-          labels: { style: { colors: '#6B7280' } },
-          title: { text: 'Valores', style: { color: '#6B7280' } },
+          labels: { style: { colors: "#6B7280" } },
+          title: { text: "Valores", style: { color: "#6B7280" } },
         },
-        tooltip: { theme: 'dark', style: { fontSize: '12px' } },
-        grid: { borderColor: '#E5E7EB', strokeDashArray: 4 },
-        fill: { colors: ['#10B981'] },
-        legend: { labels: { colors: ['#6B7280'] } },
+        tooltip: { theme: "dark", style: { fontSize: "12px" } },
+        grid: { borderColor: "#E5E7EB", strokeDashArray: 4 },
+        fill: { colors: ["#10B981"] },
+        legend: { labels: { colors: ["#6B7280"] } },
       };
       const newChart = new ApexCharts(chartRef.current, options);
       newChart.render();
@@ -82,42 +82,42 @@ export default function FosforoBoxplot() {
   }, [chart]);
 
   return (
-    <div className='font-sans flex flex-col items-center justify-center min-h-screen p-8 bg-gray-50 dark:bg-gray-50text-gray-900 dark:text-gray-900'>
-      <nav className='flex justify-center gap-6 text-sm'>
-        <a href='/' className='text-gray-900 hover:text-blue-600'>
+    <div className="font-sans flex flex-col items-center justify-center min-h-screen p-8 bg-gray-50 dark:bg-gray-50text-gray-900 dark:text-gray-900">
+      <nav className="flex justify-center gap-6 text-sm">
+        <a href="/" className="text-gray-900 hover:text-blue-600">
           Mapa da Fazenda
         </a>
         <a
-          href='/grafico/produtividade'
-          className='text-gray-900 hover:text-blue-600'
+          href="/grafico/produtividade"
+          className="text-gray-900 hover:text-blue-600"
         >
           Boxplot
         </a>
       </nav>
-      <h1 className='text-3xl font-bold text-center mb-4'>Boxplot - Fósforo</h1>
-      <div ref={chartRef} className='w-full h-80 md:h-96'></div>
-      <nav className='flex justify-center gap-6 mt-6 text-sm'>
+      <h1 className="text-3xl font-bold text-center mb-4">Boxplot - Fósforo</h1>
+      <div ref={chartRef} className="w-full h-80 md:h-96"></div>
+      <nav className="flex justify-center gap-6 mt-6 text-sm">
         <a
-          href='/grafico/produtividade'
-          className='text-gray-900 hover:text-blue-600'
+          href="/grafico/produtividade"
+          className="text-gray-900 hover:text-blue-600"
         >
           Produtividade
         </a>
-        <a href='/grafico/fosforo' className='text-blue-600 font-bold'>
+        <a href="/grafico/fosforo" className="text-blue-600 font-bold">
           Fósforo
         </a>
         <a
-          href='/grafico/potassio'
-          className='text-gray-900 hover:text-blue-600'
+          href="/grafico/potassio"
+          className="text-gray-900 hover:text-blue-600"
         >
           Potássio
         </a>
-        <a href='/grafico/calcio' className='text-gray-900 hover:text-blue-600'>
+        <a href="/grafico/calcio" className="text-gray-900 hover:text-blue-600">
           Cálcio
         </a>
         <a
-          href='/grafico/magnesio'
-          className='text-gray-900 hover:text-blue-600'
+          href="/grafico/magnesio"
+          className="text-gray-900 hover:text-blue-600"
         >
           Magnésio
         </a>
